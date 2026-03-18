@@ -3,9 +3,10 @@
 import { useState } from "react";
 
 export default function Home() {
+  const [ip, setIp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleIpClick = async () => {
+  const handleGoClick = async () => {
     setIsLoading(true);
 
     try {
@@ -38,15 +39,24 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-zinc-100 px-6">
-      <button
-        type="button"
-        onClick={handleIpClick}
-        disabled={isLoading}
-        className="rounded-2xl bg-black px-12 py-6 text-3xl font-bold tracking-wide text-white shadow-xl transition hover:scale-105 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {isLoading ? "Loading..." : "IP"}
-      </button>
+    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-4">
+      <div className="flex w-full max-w-md gap-3">
+        <input
+          type="text"
+          placeholder="IP"
+          value={ip}
+          onChange={(event) => setIp(event.target.value)}
+          className="h-12 flex-1 rounded-md border border-zinc-700 bg-zinc-900 px-4 text-base text-zinc-100 outline-none ring-0 placeholder:text-zinc-400 focus:border-zinc-500"
+        />
+        <button
+          type="button"
+          onClick={handleGoClick}
+          disabled={isLoading}
+          className="h-12 rounded-md bg-zinc-100 px-6 text-base font-semibold text-zinc-950 transition hover:bg-zinc-300 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {isLoading ? "Loading..." : "Go"}
+        </button>
+      </div>
     </main>
   );
 }
